@@ -1,6 +1,4 @@
 import java.util.*;
-
-
 class AddOnService {
     private String serviceId;
     private String name;
@@ -11,7 +9,6 @@ class AddOnService {
         this.name = name;
         this.price = price;
     }
-
     public String getServiceId() {
         return serviceId;
     }
