@@ -7,21 +7,19 @@ class InvalidBookingException extends Exception {
 
 class Reservation {
     private String reservationId;
-    private String guestName;
     private String roomType;
+    private String roomId;
+    private boolean isCancelled;
 
-    public Reservation(String reservationId, String guestName, String roomType) {
+    public Reservation(String reservationId, String roomType, String roomId) {
         this.reservationId = reservationId;
-        this.guestName = guestName;
         this.roomType = roomType;
+        this.roomId = roomId;
+        this.isCancelled = false;
     }
 
     public String getReservationId() {
         return reservationId;
-    }
-
-    public String getGuestName() {
-        return guestName;
     }
 
     public String getRoomType() {
