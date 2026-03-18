@@ -1,83 +1,57 @@
-public class BookMyStayApp {
+import java.util.HashMap;
+import java.util.Map;
+
+
+    private Map<String, Integer> roomAvailability;
+
+
+    public RoomInventory() {
+        roomAvailability = new HashMap<>();
+        initializeInventory();
+    }
+
+
+    private void initializeInventory() {
+        roomAvailability.put("Single", 5);
+        roomAvailability.put("Double", 3);
+        roomAvailability.put("Suite", 2);
+    }
+
+
+    public Map<String, Integer> getRoomAvailability() {
+        return roomAvailability;
+    }
+
+    public void updateAvailability(String roomType, int count) {
+        roomAvailability.put(roomType, count);
+    }
+
+
+    public void displayInventory() {
+        System.out.println("\n===== Room Inventory =====");
+
+        for (Map.Entry<String, Integer> entry : roomAvailability.entrySet()) {
+            System.out.println(entry.getKey() + " Rooms Available: " + entry.getValue());
+        }
+    }
+
     public class BookMyStayApp {
-
-        public static abstract class Room {
-
-            protected int numberOfBeds;
-            protected int squareFeet;
-            protected double pricePerNight;
-
-            public Room(int numberOfBeds, int squareFeet, double pricePerNight) {
-                this.numberOfBeds = numberOfBeds;
-                this.squareFeet = squareFeet;
-                this.pricePerNight = pricePerNight;
-            }
-
-            public void displayRoomDetails() {
-                System.out.println("Beds: " + numberOfBeds);
-                System.out.println("Size: " + squareFeet + " sq.ft");
-                System.out.println("Price per night: ₹" + pricePerNight);
-            }
-        }
-
-        public static class SingleRoom extends Room {
-            public SingleRoom() {
-                super(1, 150, 2000.0);
-            }
-
-            @Override
-            public void displayRoomDetails() {
-                System.out.println("\n--- Single Room ---");
-                super.displayRoomDetails();
-            }
-        }
-
-        public static class DoubleRoom extends Room {
-            public DoubleRoom() {
-                super(2, 250, 3500.0);
-            }
-
-            @Override
-            public void displayRoomDetails() {
-                System.out.println("\n--- Double Room ---");
-                super.displayRoomDetails();
-            }
-        }
-
-        public static class SuiteRoom extends Room {
-            public SuiteRoom() {
-                super(3, 400, 6000.0);
-            }
-
-            @Override
-            public void displayRoomDetails() {
-                System.out.println("\n--- Suite Room ---");
-                super.displayRoomDetails();
-            }
-        }
 
         public static void main(String[] args) {
 
-            Room singleRoom = new SingleRoom();
-            Room doubleRoom = new DoubleRoom();
-            Room suiteRoom = new SuiteRoom();
+            // Create inventory object
+            RoomInventory inventory = new RoomInventory();
 
-            int singleAvailable = 5;
-            int doubleAvailable = 3;
-            int suiteAvailable = 2;
+            // Display inventory
+            inventory.displayInventory();
 
-            System.out.println("===== Room Details & Availability =====");
+            // Example update
+            System.out.println("\nUpdating availability...");
+            inventory.updateAvailability("Single", 4);
 
-            singleRoom.displayRoomDetails();
-            System.out.println("Available: " + singleAvailable);
-
-            doubleRoom.displayRoomDetails();
-            System.out.println("Available: " + doubleAvailable);
-
-            suiteRoom.displayRoomDetails();
-            System.out.println("Available: " + suiteAvailable);
+            // Display updated inventory
+            inventory.displayInventory();
 
             System.out.println("\nSystem execution completed.");
         }
     }
-}
